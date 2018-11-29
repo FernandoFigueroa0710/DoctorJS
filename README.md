@@ -1,7 +1,6 @@
-# modern-react-boilerplate
+# DoctorJS 
 
-Basic boilerplate for React 16, Webpack 4, React Router 4.
-A minimal React project boilerplate suitable for quick app prototyping (front-end only option) or as a starting point for app development (full-stack option).
+Your doctor js is a health application where you can access and track dailiy information relevant to your health 
 
 ## Features
 
@@ -10,21 +9,19 @@ A minimal React project boilerplate suitable for quick app prototyping (front-en
 - React Router 4
 - Babel 7
 - ESLint enabled
-- MySQL or MongoDB
+- MySQL 
+- Material UI 
 
 ## Installation
 
-- `git clone https://github.com/BrunoTorresF/modern-react-boilerplate.git`
+- `git clone https://github.com/KatiesCode/DoctorJS.git`
 - cd modern-react-boilerplate
 - `npm install`
 
-### FrontEnd Only Development
-
-- Start Webpack Dev Server with `npm run frontend`
 
 ### Fullstack Development
 
 - Start Webpack with `npm run dev`
 - Start nodemon with `npm run start-dev`
 - visit `http://localhost:3000/`
-- edit your database connection details and delete the database file you're **not** using
+- edit your database connection details 
