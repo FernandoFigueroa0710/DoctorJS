@@ -99,7 +99,6 @@ app.post("/userData", function(req, res) {
   } else {
     database.userData(gender, age, weight, height, (err, results) => {
       if (err) {
-        console.log("HERE IS THE SERVER ERROR", err);
         res.sendStatus(500);
       } else {
         res.status(200);

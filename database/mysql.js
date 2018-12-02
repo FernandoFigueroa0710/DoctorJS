@@ -47,7 +47,6 @@ const userRegister = function(req, res) {
       });
     });
   });
-  //console.log("req", req.body);
 };
 
 const userLogin = function(req, res) {
@@ -83,7 +82,7 @@ const userLogin = function(req, res) {
               }
             );
           }
-          // res == true
+
         });
       }
     }
