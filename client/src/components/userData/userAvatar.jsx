@@ -24,7 +24,6 @@ function UserAvatar(props) {
     <div className={classes.row}>
       <Avatar
         alt="Fernando Figueroa"
-        src="" //your picture goes here imgur.com
         src="https://i.imgur.com/15515vu.png" //your picture goes here.
         className={classNames(classes.avatar, classes.bigAvatar)}
       />

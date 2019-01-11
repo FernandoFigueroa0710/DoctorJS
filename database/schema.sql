@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS doctorJS;
+CREATE DATABASE  doctorJS;
 
 USE doctorJS;
 
