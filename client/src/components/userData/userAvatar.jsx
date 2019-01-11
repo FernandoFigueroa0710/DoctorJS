@@ -21,10 +21,10 @@ const styles = {
 function UserAvatar(props) {
   const { classes } = props;
   return (
-    <div className={classes.row}>
+    <div className={classes.row} >
       <Avatar
         alt="Fernando Figueroa"
-        src="https://i.imgur.com/15515vu.png" //your picture goes here.
+         src="https://i.imgur.com/15515vu.png" //your picture goes here.
         className={classNames(classes.avatar, classes.bigAvatar)}
       />
     </div>
