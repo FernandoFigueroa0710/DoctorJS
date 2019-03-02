@@ -13,7 +13,7 @@ connection.connect(function(err) {
   if (!err) {
     console.log("Database is is connected...nn");
   } else {
-    console.log("Error connecting database....nn");
+    console.log("Error connecting database....nn", err);
   }
 });
 
@@ -29,10 +29,7 @@ const userRegister = function(req, res) {
         created: today,
         modified: today
       };
-      connection.query("INSERT INTO users SET ?", users, function(
-        error,
-        results
-      ) {
+      connection.query("INSERT INTO users SET ?", users, function(error) {
         if (error) {
           res.send({
             code: 400,
@@ -67,7 +64,7 @@ const userLogin = function(req, res) {
           if (!bcryptRes) {
             res.send({
               code: 400,
-              success: " Email and passord do not match"
+              success: " Email and password do not match"
             });
           } else {
             jwt.sign(
@@ -82,7 +79,6 @@ const userLogin = function(req, res) {
               }
             );
           }
-
         });
       }
     }
