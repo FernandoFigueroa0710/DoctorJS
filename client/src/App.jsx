@@ -4,7 +4,7 @@ import Loginscreen from "../src/login/LoginScreen.js";
 import UploadScreen from "./PrimaryScreen";
 import Logout from "../src/login/Logout.js";
 import axios from "axios";
-//const jwt = require("jsonwebtoken");
+
 
 class App extends Component {
   constructor(props) {
