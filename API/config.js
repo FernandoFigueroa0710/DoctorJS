@@ -1,14 +1,26 @@
 const express = require("express");
+const createError = require("http-errors");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const expressValidator = require("express-validator");
+const flash = require("connect-flash");
 const jwt = require("jsonwebtoken");
 const compression = require("compression");
-const database = require("../database/mysql");
-const app = express();
 
+const app = express();
+const database = require("../database/mysql");
+const index = require("./routes/index");
+const users = require("./routes/users");
 //middleware
 app.use(compression());
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(__dirname + "/../client/dist"));
 
 //HTTP Requests go here
@@ -21,6 +33,70 @@ app.use(function(req, res, next) {
     "Content-Type",
     "Accept"
   );
+  next();
+});
+// handle sessions
+app.use(
+  session({
+    secret: "secret",
+    saveUninitialized: true,
+    resave: true
+  })
+);
+
+//passsport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Validator
+app.use(
+  expressValidator({
+    errorFormatter: (param, msg, value) => {
+      let namespace = param.split("."),
+        root = namespace.shift(),
+        formParam = root;
+
+      while (namespace.length) {
+        formParam += "[" + namespace.shift() + "]";
+      }
+      return {
+        param: formParam,
+        msg: msg,
+        value: value
+      };
+    }
+  })
+);
+
+//messages
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
+
+app.get("*", (req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
+//Indexing
+app.use("/", index);
+app.use("/users", users);
+
+//catch 404 errors and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+//error handler
+app.use((err, req, res, next) => {
+  //set locals providing erros in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  //render the error page
+  res.status(err.status || 500);
+  res.render("error");
   next();
 });
 
